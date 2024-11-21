@@ -7,9 +7,9 @@
 
 import Foundation
 
-public enum LoadingState<T> {
+public enum LoadingState {
     case empty
     case loading
-    case success(T)
-    case failure(Error)
+    case success
+    case failure
 }

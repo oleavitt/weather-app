@@ -1,0 +1,95 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@" : {
+
+    },
+    "%@°" : {
+
+    },
+    "%lld%%" : {
+
+    },
+    "empty_no_city" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No City Selected"
+          }
+        }
+      }
+    },
+    "empty_please_search" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please Search For A City"
+          }
+        }
+      }
+    },
+    "error-empty-search" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search location cannot be empty."
+          }
+        }
+      }
+    },
+    "error-network" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error fetching your weather. Please try again."
+          }
+        }
+      }
+    },
+    "error-no-match" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location not found. Please try another search."
+          }
+        }
+      }
+    },
+    "error-unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unknown error occurred."
+          }
+        }
+      }
+    },
+    "one_moment_please" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One Moment Please…"
+          }
+        }
+      }
+    },
+    "placeholder_search_location" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Location"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

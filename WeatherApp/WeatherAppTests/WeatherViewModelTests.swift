@@ -10,21 +10,53 @@ import XCTest
 
 final class WeatherViewModelTests: XCTestCase {
 
+    var viewModel: WeatherViewModel = WeatherViewModel(networkLayer: NetworkLayerMock())
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        viewModel = WeatherViewModel(networkLayer: NetworkLayerMock())
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testInitialState() {
+        XCTAssertEqual(viewModel.state, .empty)
     }
-
-    func testInitialState() throws {
-        let viewModel = WeatherViewModel()
+    
+    func testLocationQuery() async {
+        viewModel.locationQuery = "Dallas"
         
-        if case .empty = viewModel.state {
-            
-        } else {
-            XCTFail("View model is not in empty state")
-        }
+        await viewModel.getCurrentWeather()
+        
+        XCTAssertEqual(viewModel.locationName, "Dallas")
+        XCTAssertEqual(viewModel.temperature, "64°")
+        XCTAssertEqual(viewModel.feelsLike, "62.9°")
+        XCTAssertEqual(viewModel.humidity, "18%")
+        XCTAssertEqual(viewModel.uvIndex, "1.8")
+        XCTAssert(viewModel.errorMessage.isEmpty)
+    }
+    
+    func testLocationQueryCelsius() async {
+        viewModel.locationQuery = "Dallas"
+        viewModel.showFahrenheit = false
+        
+        await viewModel.getCurrentWeather()
+        
+        XCTAssertEqual(viewModel.locationName, "Dallas")
+        XCTAssertEqual(viewModel.temperature, "17.8°")
+        XCTAssertEqual(viewModel.feelsLike, "16.8°")
+        XCTAssertEqual(viewModel.humidity, "18%")
+        XCTAssertEqual(viewModel.uvIndex, "1.8")
+        XCTAssert(viewModel.errorMessage.isEmpty)
+    }
+
+    func testInvalidLocationQuery() async {
+        viewModel.locationQuery = "xxxxx"
+        
+        await viewModel.getCurrentWeather()
+        
+        XCTAssertEqual(viewModel.locationName, "--")
+        XCTAssertEqual(viewModel.temperature, "--°")
+        XCTAssertEqual(viewModel.feelsLike, "--°")
+        XCTAssertEqual(viewModel.humidity, "--%")
+        XCTAssertEqual(viewModel.uvIndex, "--")
+        XCTAssertEqual(viewModel.errorMessage, "Location not found. Please try another search.")
     }
 }
