@@ -11,7 +11,7 @@ import SwiftUI
 struct WeatherAppApp: App {
     var body: some Scene {
         WindowGroup {
-            WeatherView(viewModel: WeatherViewModel(networkLayer: NetworkLayerMock()))
+            WeatherView(viewModel: WeatherViewModel(networkLayer: NetworkLayerLive()))
         }
     }
 }
