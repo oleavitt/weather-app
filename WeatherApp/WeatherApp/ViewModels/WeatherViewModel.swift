@@ -53,8 +53,13 @@ class WeatherViewModel: ObservableObject {
 }
 
 extension WeatherViewModel {
-    var image: Image? {
-        Image(systemName: "photo.artframe")
+    var conditionsIconUrl: URL? {
+        guard let path = currentWeather?.current?.condition.icon,
+              var components = URLComponents(string: path) else {
+            return nil
+        }
+        components.scheme = "https"
+        return components.url
     }
     
     var locationName: String {

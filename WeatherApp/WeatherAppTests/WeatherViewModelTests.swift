@@ -31,6 +31,8 @@ final class WeatherViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.humidity, "18%")
         XCTAssertEqual(viewModel.uvIndex, "1.8")
         XCTAssert(viewModel.errorMessage.isEmpty)
+        
+        XCTAssertNotNil(viewModel.conditionsIconUrl)
     }
     
     func testLocationQueryCelsius() async {
@@ -45,6 +47,8 @@ final class WeatherViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.humidity, "18%")
         XCTAssertEqual(viewModel.uvIndex, "1.8")
         XCTAssert(viewModel.errorMessage.isEmpty)
+        
+        XCTAssertNotNil(viewModel.conditionsIconUrl)
     }
 
     func testInvalidLocationQuery() async {
@@ -58,5 +62,7 @@ final class WeatherViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.humidity, "--%")
         XCTAssertEqual(viewModel.uvIndex, "--")
         XCTAssertEqual(viewModel.errorMessage, "Location not found. Please try another search.")
+        
+        XCTAssertNil(viewModel.conditionsIconUrl)
     }
 }
