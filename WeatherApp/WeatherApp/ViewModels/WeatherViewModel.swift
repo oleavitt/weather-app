@@ -16,11 +16,18 @@ class WeatherViewModel: ObservableObject {
     
     @Published var state: LoadingState = .empty
     
+    @AppStorage("lastLocationQuery") var lastLocationQuery: String?
+
     private var currentWeather: CurrentWeather?
     private var apiError: Error?
     
     init(networkLayer: NetworkLayer) {
         self.networkLayer = networkLayer
+    }
+    
+    func getLastLocationQuery() -> Bool {
+        locationQuery = lastLocationQuery ?? ""
+        return lastLocationQuery != nil && !locationQuery.isEmpty
     }
     
     @MainActor
@@ -40,6 +47,7 @@ class WeatherViewModel: ObservableObject {
                 apiError = ApiErrorType.fromErrorCode(code: errorResponse.code)
                 state = .failure
             } else {
+                lastLocationQuery = locationQuery
                 state = .success
             }
         } catch {

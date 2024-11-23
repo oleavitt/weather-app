@@ -32,6 +32,13 @@ struct WeatherView: View {
                     await viewModel.getCurrentWeather()
                 }
             }
+            .onAppear {
+                if viewModel.getLastLocationQuery() {
+                    Task {
+                        await viewModel.getCurrentWeather()
+                    }
+                }
+            }
             .padding()
         }
     }
