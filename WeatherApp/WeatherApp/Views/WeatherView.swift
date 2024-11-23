@@ -39,10 +39,13 @@ struct WeatherView: View {
     var emptyView: some View {
         VStack {
             Text("empty_no_city")
-                .font(.title)
+                .font(.custom(
+                    "Poppins", fixedSize: 30))
                 .fontWeight(.semibold)
             Text("empty_please_search")
-                .font(.body)
+                .font(.custom(
+                    "Poppins", fixedSize: 15))
+                .fontWeight(.semibold)
         }
     }
     
