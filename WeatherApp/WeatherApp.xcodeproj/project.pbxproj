@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8CFED0172CF305770091D7C1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8CFED0162CF305770091D7C1 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8CEE2C882CEE78E000B0F06B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		8CEE2C772CEE78DC00B0F06B /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CEE2C872CEE78E000B0F06B /* WeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CEE2C912CEE78E000B0F06B /* WeatherAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CFED0162CF305770091D7C1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +93,7 @@
 		8CEE2C6E2CEE78DC00B0F06B = {
 			isa = PBXGroup;
 			children = (
+				8CFED0162CF305770091D7C1 /* README.md */,
 				8CEE2C792CEE78DC00B0F06B /* WeatherApp */,
 				8CEE2C8A2CEE78E000B0F06B /* WeatherAppTests */,
 				8CEE2C942CEE78E000B0F06B /* WeatherAppUITests */,
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CFED0172CF305770091D7C1 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
