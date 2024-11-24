@@ -15,7 +15,8 @@ class WeatherViewModel: ObservableObject {
     var showFahrenheit = true
     
     @Published var state: LoadingState = .empty
-    
+    @Published var showDetails = false
+
     @AppStorage("lastLocationQuery") var lastLocationQuery: String?
 
     private var currentWeather: CurrentWeather?
@@ -38,6 +39,7 @@ class WeatherViewModel: ObservableObject {
             return
         }
         
+        showDetails = false
         state = .loading
         do {
             let current = try await networkLayer.fetchJsonData(request: request, type: CurrentWeather.self)

@@ -10,7 +10,7 @@ import SwiftUI
 struct WeatherView: View {
     
     @StateObject var viewModel: WeatherViewModel
-
+    
     var body: some View {
         NavigationStack {
             Group {
@@ -20,7 +20,7 @@ struct WeatherView: View {
                 case .loading:
                     loadingView
                 case .success:
-                    weatherView
+                    resultView
                 case .failure:
                     errorView
                 }
@@ -47,11 +47,11 @@ struct WeatherView: View {
         VStack {
             Text("empty_no_city")
                 .font(.custom(
-                    "Poppins", fixedSize: 30))
+                    currentTheme.fontFamily, fixedSize: 30))
                 .fontWeight(.semibold)
             Text("empty_please_search")
                 .font(.custom(
-                    "Poppins", fixedSize: 15))
+                    currentTheme.fontFamily, fixedSize: 15))
                 .fontWeight(.semibold)
         }
     }
@@ -62,25 +62,29 @@ struct WeatherView: View {
         }
     }
     
-    var weatherView: some View {
+    var resultView: some View {
         VStack {
-            CachedAsyncImage(url: viewModel.conditionsIconUrl) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                case .failure(_):
-                    errorImage
-                case .empty:
-                    placeHolderImage
-                @unknown default:
-                    placeHolderImage
+            if viewModel.showDetails {
+                CachedAsyncImage(url: viewModel.conditionsIconUrl) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                    default:
+                        placeHolderImage
+                    }
                 }
+                Text(viewModel.locationName)
+                Text(viewModel.temperature)
+                Text(viewModel.feelsLike)
+                Text(viewModel.humidity)
+                Text(viewModel.uvIndex)
+            } else {
+                ResultCardView(viewModel: viewModel)
+                    .onTapGesture {
+                        viewModel.showDetails.toggle()
+                    }
+                Spacer()
             }
-            Text(viewModel.locationName)
-            Text(viewModel.temperature)
-            Text(viewModel.feelsLike)
-            Text(viewModel.humidity)
-            Text(viewModel.uvIndex)
         }
     }
     
@@ -99,22 +103,6 @@ struct WeatherView: View {
         Image(systemName: "photo")
             .font(.title)
             .foregroundStyle(.placeholder)
-    }
-    
-    @ViewBuilder
-    var errorImage: some View {
-        if #available(iOS 18, *) {
-            // Show the new system two color photo with red (!) overlay
-            Image(systemName: "photo.badge.exclamationmark")
-                .font(.title)
-                .foregroundStyle(.placeholder)
-                .symbolRenderingMode(.multicolor)
-        } else {
-            // Otherwise show the old "photo" image in red
-            Image(systemName: "photo")
-                .font(.title)
-                .foregroundStyle(.red)
-        }
     }
 }
 
