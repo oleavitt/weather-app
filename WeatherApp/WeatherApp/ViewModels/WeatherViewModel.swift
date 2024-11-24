@@ -78,9 +78,9 @@ extension WeatherViewModel {
     
     var temperature: String {
         if let current = currentWeather?.current {
-            return String(localized: "\((showFahrenheit ? current.tempF : current.tempC).formatted())°")
+            return String(localized: "\((showFahrenheit ? current.tempF : current.tempC).formatted())")
         }
-        return "--°"
+        return "--"
     }
     
     var feelsLike: String {

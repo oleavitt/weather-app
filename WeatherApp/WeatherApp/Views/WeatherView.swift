@@ -63,21 +63,47 @@ struct WeatherView: View {
     }
     
     var resultView: some View {
-        VStack {
+        VStack(spacing: 0) {
             if viewModel.showDetails {
                 CachedAsyncImage(url: viewModel.conditionsIconUrl) { phase in
                     switch phase {
                     case .success(let image):
                         image
+                            .resizable()
+                            .frame(width: 150, height: 150)
                     default:
                         placeHolderImage
                     }
                 }
-                Text(viewModel.locationName)
-                Text(viewModel.temperature)
-                Text(viewModel.feelsLike)
-                Text(viewModel.humidity)
-                Text(viewModel.uvIndex)
+                HStack {
+                    Text(viewModel.locationName)
+                        .font(.custom(
+                            currentTheme.fontFamily, fixedSize: 30))
+                        .fontWeight(.semibold)
+                    Image(systemName: "location.fill")
+                }
+                HStack(alignment: .top, spacing: 0) {
+                    Text(viewModel.temperature)
+                        .font(.custom(
+                            currentTheme.fontFamily, fixedSize: 64))
+                        .fontWeight(.semibold)
+                    Text("°")
+                        .font(.title)
+                        .padding(.top, 8)
+                }
+                HStack(spacing: 0) {
+                    detailCell("humidity", value: viewModel.humidity)
+                    detailCell("uv", value: viewModel.uvIndex)
+                    detailCell("feels_like", value: viewModel.feelsLike)
+                }
+                .frame(width: 274)
+                .frame(minHeight: 75)
+                .background {
+                    currentTheme.backgroundColor
+                }
+                .cornerRadius(16)
+                .padding([.top, .horizontal])
+                Spacer()
             } else {
                 ResultCardView(viewModel: viewModel)
                     .onTapGesture {
@@ -86,6 +112,20 @@ struct WeatherView: View {
                 Spacer()
             }
         }
+    }
+    
+    func detailCell(_ title: LocalizedStringKey, value: String) -> some View {
+        VStack {
+            Text(title)
+                .font(.custom(
+                    currentTheme.fontFamily, fixedSize: 12))
+                .foregroundStyle(.placeholder)
+            Text(value)
+                .font(.custom(
+                    currentTheme.fontFamily, fixedSize: 14))
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
     }
     
     var errorView: some View {

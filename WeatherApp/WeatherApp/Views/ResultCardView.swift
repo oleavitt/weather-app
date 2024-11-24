@@ -18,11 +18,17 @@ struct ResultCardView: View {
                     .font(.custom(
                         currentTheme.fontFamily, fixedSize: 20))
                     .fontWeight(.semibold)
-                Text(viewModel.temperature)
-                    .font(.custom(
-                        currentTheme.fontFamily, fixedSize: 50))
-                    .fontWeight(.regular)
-                    .padding(.vertical, -12)
+                    .padding(.bottom, -8)
+                HStack(alignment: .top, spacing: 0) {
+                    Text(viewModel.temperature)
+                        .font(.custom(
+                            currentTheme.fontFamily, fixedSize: 50))
+                        .fontWeight(.regular)
+                    Text("°")
+                        .font(.title)
+                        .padding(.top, 8)
+                }
+                .padding(.bottom, -12)
             }
             .frame(maxWidth: .infinity)
             CachedAsyncImage(url: viewModel.conditionsIconUrl) { phase in

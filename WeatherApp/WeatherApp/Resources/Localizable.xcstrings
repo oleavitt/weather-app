@@ -10,6 +10,9 @@
     "%lld%%" : {
 
     },
+    "°" : {
+
+    },
     "empty_no_city" : {
       "localizations" : {
         "en" : {
@@ -70,6 +73,26 @@
         }
       }
     },
+    "feels_like" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feels Like"
+          }
+        }
+      }
+    },
+    "humidity" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Humidity"
+          }
+        }
+      }
+    },
     "one_moment_please" : {
       "localizations" : {
         "en" : {
@@ -86,6 +109,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search Location"
+          }
+        }
+      }
+    },
+    "uv" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UV"
           }
         }
       }
