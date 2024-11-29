@@ -12,13 +12,13 @@ class WeatherViewModel: ObservableObject {
     
     var networkLayer: NetworkLayer
     var locationQuery: String = ""
-    var showFahrenheit = true
     
+    @Published var showFahrenheit = true
     @Published var state: LoadingState = .empty
     @Published var showDetails = false
-
+    
     @AppStorage("lastLocationQuery") var lastLocationQuery: String?
-
+    
     private var currentWeather: CurrentWeather?
     private var apiError: Error?
     
@@ -34,8 +34,8 @@ class WeatherViewModel: ObservableObject {
     @MainActor
     func getCurrentWeather() async {
         if case .loading = state { return }
-
-        guard let request = WeatherApiEndpoint.current(query: locationQuery).request else {
+        
+        guard let request = WeatherApiEndpoint.forecast(query: locationQuery).request else {
             return
         }
         
@@ -44,7 +44,7 @@ class WeatherViewModel: ObservableObject {
         do {
             let current = try await networkLayer.fetchJsonData(request: request, type: CurrentWeather.self)
             currentWeather = current
-
+            
             if let errorResponse = current.error {
                 apiError = ApiErrorType.fromErrorCode(code: errorResponse.code)
                 state = .failure
@@ -107,4 +107,18 @@ extension WeatherViewModel {
     var errorMessage: String {
         apiError?.localizedDescription ?? ""
     }
+    
+    var forecastDays: [DisplayForcastDay] {
+        currentWeather?.forecast?.forecastday.map {
+            showFahrenheit ?
+            DisplayForcastDay(hi: $0.day.maxtempF, lo: $0.day.mintempF) :
+            DisplayForcastDay(hi: $0.day.maxtempC, lo: $0.day.mintempC)
+        } ?? []
+    }
+}
+
+struct DisplayForcastDay: Identifiable, Hashable {
+    var id = UUID()
+    let hi: Double
+    let lo: Double
 }

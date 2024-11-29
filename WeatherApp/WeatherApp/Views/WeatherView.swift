@@ -10,7 +10,7 @@ import SwiftUI
 struct WeatherView: View {
     
     @StateObject var viewModel: WeatherViewModel
-    
+
     var body: some View {
         NavigationStack {
             Group {
@@ -103,6 +103,17 @@ struct WeatherView: View {
                 }
                 .cornerRadius(16)
                 .padding([.top, .horizontal])
+                Toggle(isOn: $viewModel.showFahrenheit) {
+                    Text("show-fahrenheit")
+                }
+                Text("forecast")
+                    .font(.custom(
+                        currentTheme.fontFamily, fixedSize: 30))
+                HStack {
+                    ForEach(viewModel.forecastDays, id: \.self) { day in
+                        forecastCell(day.hi, day.lo)
+                    }
+                }
                 Spacer()
             } else {
                 ResultCardView(viewModel: viewModel)
@@ -126,6 +137,25 @@ struct WeatherView: View {
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
+    }
+    
+    func forecastCell(_ hi: Double, _ lo: Double) -> some View {
+        VStack {
+            Text(hi.formatted())
+                .font(.custom(
+                    currentTheme.fontFamily, fixedSize: 14))
+                .foregroundStyle(.secondary)
+            Text(lo.formatted())
+                .font(.custom(
+                    currentTheme.fontFamily, fixedSize: 14))
+                .foregroundStyle(.secondary)
+        }
+        .frame(width: 70)
+        .frame(minHeight: 50)
+        .background {
+            currentTheme.backgroundColor
+        }
+        .cornerRadius(16)
     }
     
     var errorView: some View {

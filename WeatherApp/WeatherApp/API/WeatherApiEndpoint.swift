@@ -12,7 +12,8 @@ private let apiHost = "api.weatherapi.com"
 
 enum WeatherApiEndpoint: Endpoint {
     case current(query: String)
-    
+    case forecast(query: String)
+
     var url: URL? {
         switch self {
         case .current(let query):
@@ -24,6 +25,19 @@ enum WeatherApiEndpoint: Endpoint {
                 URLQueryItem(name: "key", value: apiKey),
                 URLQueryItem(name: "q", value: query),
                 URLQueryItem(name: "aqi", value: "no")
+            ]
+            
+            return components.url
+            
+        case .forecast(let query):
+            var components = URLComponents()
+            components.scheme = "https"
+            components.host = apiHost
+            components.path = "/v1/forecast.json"
+            components.queryItems = [
+                URLQueryItem(name: "key", value: apiKey),
+                URLQueryItem(name: "q", value: query),
+                URLQueryItem(name: "days", value: "14")
             ]
             
             return components.url

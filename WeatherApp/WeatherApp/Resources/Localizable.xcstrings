@@ -83,6 +83,16 @@
         }
       }
     },
+    "forecast" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forecast"
+          }
+        }
+      }
+    },
     "humidity" : {
       "localizations" : {
         "en" : {
@@ -109,6 +119,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search Location"
+          }
+        }
+      }
+    },
+    "show-fahrenheit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Fahrenheit"
           }
         }
       }
