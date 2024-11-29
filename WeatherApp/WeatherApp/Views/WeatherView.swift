@@ -141,11 +141,11 @@ struct WeatherView: View {
     
     func forecastCell(_ hi: Double, _ lo: Double) -> some View {
         VStack {
-            Text(hi.formatted())
+            Text(hi.formatted() + "°")
                 .font(.custom(
                     currentTheme.fontFamily, fixedSize: 14))
                 .foregroundStyle(.secondary)
-            Text(lo.formatted())
+            Text(lo.formatted() + "°")
                 .font(.custom(
                     currentTheme.fontFamily, fixedSize: 14))
                 .foregroundStyle(.secondary)
